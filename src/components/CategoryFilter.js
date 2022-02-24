@@ -1,10 +1,36 @@
 import React from "react";
+import { useState } from "react/cjs/react.production.min";
 
-function CategoryFilter() {
+function CategoryFilter({CATEGORIES,TASKS,handelFilterInAPP}) {
+  function handleFilter(cat){
+    handelFilterInAPP(TASKS.filter((task)=>{
+      console.log(cat);
+      if(task.category === cat||cat === 'All'){
+        
+        return task;
+      }
+    }))
+  }
   return (
     <div className="categories">
       <h5>Category filters</h5>
-      {/* render <button> elements for each category here */}
+      {
+        CATEGORIES.map((element)=>{
+            
+            return <button key={element} className="" onClick={(e)=>{
+              
+              if(e.target.className === ''){
+                e.target.className = 'selected'
+                handleFilter(element);
+              }else{
+                e.target.className = '';
+                handleFilter('All');
+              }
+            }
+
+            }>{element}</button>
+        })
+      }
     </div>
   );
 }

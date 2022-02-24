@@ -1,9 +1,14 @@
 import React from "react";
-
-function TaskList() {
+import Task from './Task'
+import uuid from "uuid";
+function TaskList({tasks,handleDeleteButton}) {
   return (
     <div className="tasks">
-      {/* display a list of tasks using Task component */}
+      {
+        tasks.map((e)=>{
+            return <Task key={uuid} category={e.category} text={e.text} handleDeleteButton={handleDeleteButton}></Task>
+        })
+      }
     </div>
   );
 }
